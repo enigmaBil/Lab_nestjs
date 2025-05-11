@@ -1,0 +1,4 @@
+export enum PlanType {
+    ABONNEMENT= "ABONNEMENT",
+    ENTRAINEMENT= "ENTRAINEMENT",
+}

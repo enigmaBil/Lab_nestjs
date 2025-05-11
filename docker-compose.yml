@@ -1,0 +1,32 @@
+services:
+  postgres:
+    container_name: tp_gym_bd
+    image: 'postgres:latest'
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=gym_db
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+    ports:
+      - "6000:5432"
+    volumes:
+      - gym_pg_data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: gym_pgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - "4000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gym.tn
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    volumes:
+      - gym_pgadmin_data:/var/lib/pgadmin
+volumes:
+  gym_pg_data:
+    driver: local
+  gym_pgadmin_data:
+    driver: local
+
